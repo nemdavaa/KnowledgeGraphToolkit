@@ -1,17 +1,17 @@
-version: '3.8'
+version: "3"
+
 services:
   graphdb:
-    image: ontotext/graphdb:latest
+    image: ontotext/graphdb-free:9.8.0
     container_name: graphdb
     ports:
       - "7200:7200"
-    environment:
-      - GRAPHDB_HOME=/opt/graphdb
     volumes:
       - ./data:/opt/graphdb/data
+    environment:
+      - GRAPHDB_HOME=/opt/graphdb
     networks:
       - graphdb_network
-    restart: unless-stopped
 
 networks:
   graphdb_network:
