@@ -26,6 +26,34 @@ This project utilises **GraphDB** due to its:
 
 While alternatives like Neo4j and Blazegraph exist, GraphDB was chosen for its strong focus on semantic data integration and high-performance querying.
 
+## Running GraphDB with Docker
+
+This project integrates with [GraphDB](https://www.ontotext.com/products/graphdb/). You can use Docker to easily run GraphDB locally.
+
+### Using Docker Compose
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/nemdavaa00/KnowledgeGraphToolkit.git
+    cd KnowledgeGraphToolkit
+    ```
+
+2. Navigate to the `docker/` directory:
+    ```bash
+    cd docker
+    ```
+
+3. Run Docker Compose to start GraphDB:
+    ```bash
+    docker-compose up
+    ```
+
+4. Once GraphDB is running, open [http://localhost:7200](http://localhost:7200) in your browser to access the GraphDB Workbench.
+
+### Manual GraphDB Setup
+
+Alternatively, you can manually install GraphDB. Follow the instructions provided by [GraphDB's official documentation](https://www.ontotext.com/products/graphdb/download/).
+
 ## Project Structure
 - `core/`: Contains the main framework components.
 - `plugins/`: Custom extensions and additional modules.

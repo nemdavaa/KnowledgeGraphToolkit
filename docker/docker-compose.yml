@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  graphdb:
+    image: ontotext/graphdb:latest
+    container_name: graphdb
+    ports:
+      - "7200:7200"
+    environment:
+      - GRAPHDB_HOME=/opt/graphdb
+    volumes:
+      - ./data:/opt/graphdb/data
+    networks:
+      - graphdb_network
+    restart: unless-stopped
+
+networks:
+  graphdb_network:
+    driver: bridge
