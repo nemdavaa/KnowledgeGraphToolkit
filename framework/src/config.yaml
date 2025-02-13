@@ -1,0 +1,7 @@
+graphdb:
+  url: "http://localhost:8000/repositories/network/statements"
+  ttl_output: "plugins/mine-sweeper/data/graph_data.ttl"
+
+plugins:
+  enabled: ["mine_sweeper"]
+  path: "plugins/mine-sweeper/src"
