@@ -127,7 +127,7 @@ def main() -> None:
     excel_file_path = '../data/network-policy.xlsx'
     
     # Path to save the generated TTL file
-    ttl_output_path = 'graph_data.ttl'
+    ttl_output_path = '../data/graph_data.ttl'
     
     # GraphDB URL (ensure it's running and accessible)
     graphdb_url = 'http://localhost:8000/repositories/network/statements'
