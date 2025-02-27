@@ -1,7 +1,6 @@
 import yaml
 import sys
 import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from framework.src.graphdb import upload_ttl_to_graphdb
 from framework.src.plugin_manager import PluginManager
 
