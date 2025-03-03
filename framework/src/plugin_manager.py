@@ -20,8 +20,14 @@ class PluginManager:
             if os.path.exists(plugin_path):
                 module = self.load_module(name, plugin_path)
                 if module:
-                    plugin_instance = getattr(module, name.capitalize())()  # Instantiate plugin class
-                    plugins[name] = plugin_instance
+                    class_name = self.get_plugin_class_name(name)
+                    if hasattr(module, class_name):
+                        plugin_instance = getattr(module, class_name)()  # Instantiate plugin class
+                        plugins[name] = plugin_instance
+                    else:
+                        print(f"Error: Plugin '{name}' is missing the class '{class_name}'.")
+                else:
+                    print(f"Error: Could not load plugin module '{name}'.")
             else:
                 print(f"Warning: Plugin '{name}' not found.")
         return plugins
@@ -31,9 +37,9 @@ class PluginManager:
         spec = importlib.util.spec_from_file_location(name, path)
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
+        return module
 
-        if hasattr(module, name.capitalize()):  # Ensure class exists
-            return module
-        else:
-            print(f"Error: Plugin '{name}' is missing the class '{name.capitalize()}'.")
-            return None
+    def get_plugin_class_name(self, plugin_name):
+        """Generate the class name from the plugin name."""
+        # Capitalize each part of the name after an underscore and remove the underscores
+        return ''.join(word.capitalize() for word in plugin_name.split('_'))

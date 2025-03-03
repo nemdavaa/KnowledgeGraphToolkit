@@ -2,13 +2,10 @@ import pandas as pd
 from framework.src.plugin_base import InputPlugin
 
 class ExcelInput(InputPlugin):
-    def __init__(self, excel_path): 
-        self.excel_path = excel_path
-
-    def load_data(self):
+    def load_data(self, excel_path):
         try:
             # Load the "Allowed by networkpolicies" sheet
-            sheet_data = pd.read_excel(self.excel_path, sheet_name="Allowed by networkpolicies", header=None)
+            sheet_data = pd.read_excel(excel_path, sheet_name="Allowed by networkpolicies", header=None)
 
             # Extract headers
             target_categories = sheet_data.iloc[0, 2:].ffill().tolist()
@@ -34,6 +31,6 @@ class ExcelInput(InputPlugin):
             print(f"Error loading Excel file {self.file_path}: {e}")
             return None
 
-    def run(self):
-        print(f"Loading data from {self.excel_path}...")
-        return self.load_data()
+    def run(self, excel_path):
+        print(f"Loading data from {excel_path}...")
+        return self.load_data(excel_path)

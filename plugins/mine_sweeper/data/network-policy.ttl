@@ -1,4 +1,4 @@
-# Generated on 2025-03-03 11:39:27.019643
+# Generated on 2025-03-04 00:02:11.084531
 
 @prefix ex: <http://example.org/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
