@@ -2,9 +2,9 @@ graphdb:
   url: "http://localhost:8000/repositories/network/statements"
 
 plugins:
+  path: "plugins"
   enabled:
     - name: "mine_sweeper"
-      ttl_output: "plugins/mine-sweeper/data/graph_data.ttl"
-    - name: "another_plugin"
-      ttl_output: "plugins/another-plugin/data/transformed_data.ttl"
-  path: "plugins"
+      ttl_output: "plugins/mine_sweeper/data/graph_data.ttl"
+    - name: "cmake"
+      ttl_output: "plugins/cmake/data/transformed_data.ttl"
