@@ -1,7 +1,7 @@
 import argparse
 import logging
-from framework import Framework
-from framework import PluginManager
+from framework.src.framework import Framework
+from framework.src.plugin_manager import PluginManager
 
 # Configure logging
 logging.basicConfig(
@@ -35,7 +35,8 @@ def main():
     subparsers = parser.add_subparsers(dest="command")
 
     # List plugins command
-    subparsers.add_parser("list-plugins", help="List all available plugins")
+    list_parser = subparsers.add_parser("list-plugins", help="List all available plugins")
+    list_parser.add_argument("--config", type=str, help="Path to the config file", default="framework/src/config.yaml")
 
     # Run plugin command
     run_parser = subparsers.add_parser("run", help="Run a specific plugin")

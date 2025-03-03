@@ -1,7 +1,7 @@
 import logging
 import sys
 from pathlib import Path
-from plugin_manager import PluginManager
+from framework.src.plugin_manager import PluginManager
 
 # Configure logging
 logging.basicConfig(
