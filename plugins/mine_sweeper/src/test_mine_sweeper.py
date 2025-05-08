@@ -1,21 +1,19 @@
-from plugins.mine_sweeper.src.input_excel import ExcelInput
-from plugins.mine_sweeper.src.transform_ttl import TTLTransformer
-from plugins.mine_sweeper.src.output_ttl import TTLOutput
+from plugins.mine_sweeper.src.mine_sweeper import MineSweeper
 
-# Define test Excel file path
+import os
+print("Current Working Directory: ", os.getcwd())
+
+# Define test Excel file path (Make sure this file exists at the specified path)
 excel_path = "plugins/mine_sweeper/data/network-policy.xlsx"
 
-# Step 1: Read Excel Data
-excel_input = ExcelInput()
-data = excel_input.run(excel_path)  # Should print "Reading Excel file: sample_data.xlsx..."
+# Create an instance of MineSweeper and run the process
+mine_sweeper = MineSweeper()
 
-# Step 2: Transform to TTL
-ttl_transformer = TTLTransformer()
-ttl_data = ttl_transformer.run(data)  # Should print "Transforming data to TTL format..."
+# Run the plugin, which will load data, transform it, and save the TTL output
+ttl_file_path = mine_sweeper.run(excel_path)
 
-# Step 3: Save TTL Output
-ttl_output = TTLOutput()
-ttl_file_path = ttl_output.run(ttl_data, excel_path)  # Should print "Creating sample_data.ttl..."
-
-# Print result
-print(f"\nTest completed! TTL file created: {ttl_file_path}")
+# Final result
+if ttl_file_path:
+    print(f"Test completed! TTL file created at: {ttl_file_path}")
+else:
+    print("Test failed.")

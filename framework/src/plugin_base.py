@@ -1,33 +1,36 @@
 from abc import ABC, abstractmethod
 
 class PluginBase(ABC):
-    """Base class for all plugins."""
+    """
+    Base class for all plugins. Each plugin must implement `run` and `get_metadata`.
+    """
 
     @abstractmethod
-    def run(self):
-        """Execute the plugin."""
+    def run(self, params: dict) -> str:
+        """
+        Run the plugin with the given parameters.
+        Args:
+            params (dict): Parameters for the plugin
+        Returns:
+            str: Output path or result.
+        """
         pass
 
-class InputPlugin(PluginBase):
-    """Base class for input plugins."""
-
     @abstractmethod
-    def load_data(self):
-        """Load data from a source."""
-        pass
-
-class TransformPlugin(PluginBase):
-    """Base class for transformation plugins."""
-
-    @abstractmethod
-    def process_data(self, data):
-        """Transform the given data."""
-        pass
-
-class OutputPlugin(PluginBase):
-    """Base class for output plugins."""
-
-    @abstractmethod
-    def save_data(self, data):
-        """Save data to a destination."""
+    def get_metadata(self) -> dict:
+        """
+        Return plugin metadata including expected parameters.
+        Returns:
+            dict: Metadata including name, description, parameters, etc.
+        Example:
+            {
+                "name": "mine_sweeper",
+                "description": "Parses mines from Excel and generates RDF.",
+                "parameters": {
+                    "input": {"type": "str", "required": True},
+                    "repname": {"type": "str", "required": True},
+                    "user": {"type": "str", "required": False, "default": None}
+                }
+            }
+        """
         pass
