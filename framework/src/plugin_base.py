@@ -2,35 +2,56 @@ from abc import ABC, abstractmethod
 
 class PluginBase(ABC):
     """
-    Base class for all plugins. Each plugin must implement `run` and `get_metadata`.
+    Abstract base class for all plugins in the framework.
+
+    This class defines the required interface that all plugins must implement.
+    Additionally, it supports optional dependency injection for shared components
+    such as the database manager.
     """
+
+    def __init__(self):
+        self.database_manager = None
+
+    def set_managers(self, *, database_manager=None):
+        """
+        Inject external shared managers (e.g., DatabaseManager) into the plugin instance.
+
+        Args:
+            database_manager (DatabaseManager, optional): Instance of a database manager
+                that allows the plugin to interact with a backend repository.
+        """
+        self.database_manager = database_manager
 
     @abstractmethod
     def run(self, params: dict) -> str:
         """
-        Run the plugin with the given parameters.
+        Execute the plugin logic using the provided parameters.
+
         Args:
-            params (dict): Parameters for the plugin
+            params (dict): Runtime parameters for the plugin execution.
+
         Returns:
-            str: Output path or result.
+            str: Path to the generated output, or another result depending on the plugin.
         """
         pass
 
     @abstractmethod
-    def get_metadata(self) -> dict:
+    def info(self) -> dict:
         """
-        Return plugin metadata including expected parameters.
+        Describe the plugin’s metadata, functionality, and expected input parameters.
+
         Returns:
-            dict: Metadata including name, description, parameters, etc.
-        Example:
-            {
-                "name": "mine_sweeper",
-                "description": "Parses mines from Excel and generates RDF.",
-                "parameters": {
-                    "input": {"type": "str", "required": True},
-                    "repname": {"type": "str", "required": True},
-                    "user": {"type": "str", "required": False, "default": None}
-                }
-            }
+            dict: Structured metadata including:
+                - name (str): Unique plugin identifier
+                - description (str): Summary of plugin behavior
+                - parameters (dict): Expected input parameters with the following structure:
+                    {
+                        param_name: {
+                            "type": str,
+                            "required": bool,
+                            "default": Any,
+                            "description": str
+                        }, ...
+                    }
         """
         pass

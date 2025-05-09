@@ -2,7 +2,7 @@ import logging
 
 class LoggingConfig:
     @staticmethod
-    def setup(logger_name="framework"):
+    def setup(logger_name):
         formatter = logging.Formatter(
             fmt=f"%(asctime)s - %(levelname)s - [{logger_name}] - %(message)s",
             datefmt="%Y-%m-%d %H:%M:%S"
